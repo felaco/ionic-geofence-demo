@@ -1,5 +1,7 @@
 {
   "name": "geofence-ionic-demo",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
