@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="cl.finmarkets.demo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="cl.finmarkets.demo.geofence" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>geofence-ionic-demo</name>
     <description>Demo sobre geofence desde Finmarkets</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Finmarkets</author>
@@ -87,6 +87,7 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyDCzTPjEC4NdLuDLzNRqyz-GSNEg0Wtq84" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyDCzTPjEC4NdLuDLzNRqyz-GSNEg0Wtq84" />
     </plugin>
+    <plugin name="cordova-plugin-geofence-fm" spec="https://github.com/ja1mecc/ionic-cordova-geofence-fm.git" />
     <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
 </widget>

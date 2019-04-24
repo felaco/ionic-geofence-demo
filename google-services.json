@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "798242300308",
+    "firebase_url": "https://geofence-demo-finmarkets.firebaseio.com",
+    "project_id": "geofence-demo-finmarkets",
+    "storage_bucket": "geofence-demo-finmarkets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798242300308:android:39ad002d115ab1aa",
+        "android_client_info": {
+          "package_name": "cl.finmarkets.demo.geofence"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798242300308-9jej5mvdkbk0b7imrbukuusrbonkdr10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc7CWUfv1rWSaT5B7yhnau8VP3NFIsjI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798242300308-9jej5mvdkbk0b7imrbukuusrbonkdr10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

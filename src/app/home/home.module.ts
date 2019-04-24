@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {HomePage} from './home.page';
+import {GeofenceFmService} from '../providers/geofence-fm.service';
 
 @NgModule({
     imports: [
@@ -18,7 +19,10 @@ import {HomePage} from './home.page';
             }
         ]),
     ],
-    declarations: [HomePage]
+    declarations: [HomePage],
+    providers: [
+        GeofenceFmService,
+    ]
 })
 export class HomePageModule {
 }

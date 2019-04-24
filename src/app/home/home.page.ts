@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonRange, Platform} from '@ionic/angular';
-import {Circle, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, Marker} from '@ionic-native/google-maps';
+import {Circle, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, LocationService, Marker, MyLocation} from '@ionic-native/google-maps';
+import {GeofenceFmService} from '../providers/geofence-fm.service';
 
 
 interface GeofenceElement {
@@ -24,70 +25,82 @@ export class HomePage implements OnInit {
     private currGeofenceElement: GeofenceElement;
     private geofencesElements: Array<GeofenceElement> = [];
 
-    constructor(private platform: Platform) {
+    constructor(
+        private platform: Platform,
+        private geofenceProvider: GeofenceFmService
+    ) {
     }
 
     async ngOnInit() {
         await this.platform.ready();
+        await this.geofenceProvider.init();
         await this.loadMap();
         this.bottomModal = document.getElementById('bottom-modal');
     }
 
     loadMap() {
-        this.map = GoogleMaps.create('map_canvas', {
-            camera: {
-                target: {
-                    lat: -33.3930,
-                    lng: -70.5578
-                },
-                zoom: 15
-            }
+        LocationService.getMyLocation().then((myLocation: MyLocation) => {
+            this.map = GoogleMaps.create('map_canvas', {
+                camera: {
+                    target: myLocation.latLng,
+                    zoom: 15
+                }
+            });
+
+            this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+                this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((latLng: Array<LatLng>) => {
+
+                    const marker = this.map.addMarkerSync({
+                        position: {
+                            lat: latLng[0].lat,
+                            lng: latLng[0].lng
+                        }
+                    });
+
+                    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe((argsArr) => {
+                        this.bottomModal.classList.add('modal-shown');
+                        this.manageModalOpen(argsArr[0], argsArr[1]);
+                    });
+
+                    const circle = this.map.addCircleSync({
+                        center: {
+                            lat: latLng[0].lat,
+                            lng: latLng[0].lng
+                        },
+                        radius: 250,
+                        fillColor: '#80bfff22',
+                        strokeWidth: 2,
+                        strokeColor: '#3399ff'
+                    });
+
+                    this.geofencesElements.push({
+                        lat: latLng[0].lat,
+                        lng: latLng[0].lng,
+                        marker,
+                        circle
+                    });
+
+                    const id = latLng[0].lat + '|' + latLng[0].lng;
+                    this.geofenceProvider.addOrUpdateFence([{
+                        id,
+                        latitud: latLng[0].lat,
+                        longitud: latLng[0].lng,
+                        radius: 250
+                    }]);
+                });
+
+                this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe(() => {
+                    this.bottomModal.classList.remove('modal-shown');
+                    this.currGeofenceElement = null;
+                });
+
+                this.map.on(GoogleMapsEvent.MAP_DRAG).subscribe(() => {
+                    this.bottomModal.classList.remove('modal-shown');
+                    this.currGeofenceElement = null;
+                });
+            });
         });
 
-        this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-            this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((latLng: Array<LatLng>) => {
-
-                const marker = this.map.addMarkerSync({
-                    position: {
-                        lat: latLng[0].lat,
-                        lng: latLng[0].lng
-                    }
-                });
-
-                marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe((argsArr) => {
-                    this.bottomModal.classList.add('modal-shown');
-                    this.manageModalOpen(argsArr[0], argsArr[1]);
-                });
-
-                const circle = this.map.addCircleSync({
-                    center: {
-                        lat: latLng[0].lat,
-                        lng: latLng[0].lng
-                    },
-                    radius: 100,
-                    fillColor: '#80bfff22',
-                    strokeWidth: 2,
-                    strokeColor: '#3399ff'
-                });
-
-                this.geofencesElements.push({
-                    lat: latLng[0].lat,
-                    lng: latLng[0].lng,
-                    marker,
-                    circle
-                });
-            });
-
-            this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe(() => {
-                this.bottomModal.classList.remove('modal-shown');
-                this.currGeofenceElement = null;
-            });
-
-            this.map.on(GoogleMapsEvent.MAP_DRAG).subscribe(() => {
-                this.bottomModal.classList.remove('modal-shown');
-                this.currGeofenceElement = null;
-            });
-        });
     }
 
     private manageModalOpen(latlng: LatLng, marker: Marker) {
@@ -100,6 +113,10 @@ export class HomePage implements OnInit {
     manageModalEditRadius(event) {
         const newVal = event.detail.value;
         this.currGeofenceElement.circle.setRadius(newVal);
+    }
+
+    manageBlur(event) {
+        console.log(event);
     }
 
 }
