@@ -19,4 +19,8 @@ export class GeofenceFmService extends IonicNativePlugin {
         console.log(JSON.stringify(args));
         return cordova(this, 'addOrUpdateFence', {}, [args]);
     }
+
+    removeGeofence(id: string): Promise<any> {
+        return cordova(this, 'removeGeofence', {}, [{id}]);
+    }
 }

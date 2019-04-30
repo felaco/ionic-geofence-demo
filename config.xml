@@ -23,6 +23,7 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
+        <resource-file src="resources/android/jumbo.png" target="app/src/main/res/drawable/jumbo.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
         <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
@@ -87,7 +88,7 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyDCzTPjEC4NdLuDLzNRqyz-GSNEg0Wtq84" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyDCzTPjEC4NdLuDLzNRqyz-GSNEg0Wtq84" />
     </plugin>
-    <plugin name="cordova-plugin-geofence-fm" spec="https://github.com/ja1mecc/ionic-cordova-geofence-fm.git" />
-    <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-plugin-geofence-fm" spec="https://github.com/felaco/ionic-cordova-geofence-fm.git" />
     <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>
