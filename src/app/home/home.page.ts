@@ -98,6 +98,8 @@ export class HomePage implements OnInit {
     manageModalEditRadius(event) {
         const newVal = event.detail.value;
         this.currGeofenceElement.circle.setRadius(newVal);
+        this.currGeofenceElement.circleBackup.radius = newVal;
+        localStorage.setItem('geofences', JSON.stringify(this.geofencesElements));
     }
 
     manageModalMouseUp(event) {

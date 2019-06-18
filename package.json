@@ -33,11 +33,11 @@
     "cordova-plugin-geofence-fm": "https://github.com/felaco/ionic-cordova-geofence-fm.git",
     "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
-    "cordova-plugin-ionic-webview": "^4.0.1",
+    "cordova-plugin-ionic-webview": "^4.1.0",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-support-google-services": "1.1.0",
+    "cordova-support-google-services": "^1.1.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
@@ -74,7 +74,9 @@
     "plugins": {
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "AIzaSyDCzTPjEC4NdLuDLzNRqyz-GSNEg0Wtq84",
-        "API_KEY_FOR_IOS": "AIzaSyDCzTPjEC4NdLuDLzNRqyz-GSNEg0Wtq84"
+        "API_KEY_FOR_IOS": "AIzaSyDCzTPjEC4NdLuDLzNRqyz-GSNEg0Wtq84",
+        "PLAY_SERVICES_VERSION": "15.0.1",
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
@@ -83,7 +85,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-geofence-fm": {}
     },
     "platforms": [
       "android",
